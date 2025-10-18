@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sarah Khairy — Portfolio</title>
+
+  <!-- Tech Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- AOS for scroll animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg:#07080a;
+      --panel:#0f1113;
+      --muted:#9aa3ad;
+      --accent1:#8e44ad; /* purple */
+      --accent2:#1abc9c; /* turquoise */
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --mono: 'Rajdhani', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--mono);
+      background: linear-gradient(180deg, var(--bg) 0%, #040405 100%);
+      color:#e9eef3;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* NAV */
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:12px 0;
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(7,8,10,0.28), rgba(7,8,10,0.12));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .avatar{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#071017;
+      box-shadow: 0 8px 24px rgba(30,30,40,0.55);
+      font-family:var(--mono);
+    }
+    .brand .name{font-weight:700;font-size:0.95rem}
+    .nav-links{display:flex;gap:12px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:0.95rem}
+    .nav-links a:hover{color:#fff;background:var(--glass)}
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+      align-items:center;
+      padding:54px 0 36px 0;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:34px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero-left{display:flex;flex-direction:column;gap:14px}
+    .hero-role{color:var(--muted);font-weight:600;font-size:0.95rem;letter-spacing:0.6px}
+    .hero-title{
+      font-size:1.95rem;
+      margin:0;
+      font-weight:700;
+      letter-spacing:0.2px;
+      color: #f5f7f9;
+    }
+    .hero-sub{
+      color:#d3d9dd;opacity:0.95;margin-top:6px;max-width:760px;
+    }
+    .hero-cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+    .btn{
+      padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700;
+      display:inline-flex;gap:10px;align-items:center;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#071017}
+    .btn-outline{background:transparent;color:var(--accent2);border:1px solid rgba(26,188,156,0.12)}
+
+    /* SUMMARY CARDS */
+    .summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:22px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:10px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    }
+    .card h3{margin:0 0 8px 0;color:var(--accent1)}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* SECTIONS */
+    section.section{padding:48px 0}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .section-title h2{margin:0;font-size:1.3rem;color:#fff}
+    .section-title .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--accent2),var(--accent1))}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .project{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .28s ease, box-shadow .28s ease;
+      cursor:pointer;
+    }
+    .project:hover{transform:translateY(-8px);box-shadow:0 18px 45px rgba(0,0,0,0.6)}
+    .project .p-title{font-weight:700;margin-bottom:8px}
+    .project .p-desc{color:var(--muted);font-size:0.95rem;margin-bottom:12px}
+    .project .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:0.85rem;color:var(--muted)}
+
+    /* Skills */
+    .skills-grid{display:flex;flex-wrap:wrap;gap:10px}
+    .skill-badge{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:999px;padding:8px 12px;font-weight:700;color:#dce7ea;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Contact */
+    .contact-card{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+    .contact-row{display:flex;gap:12px;align-items:center}
+    .contact-row a{color:#dbeef0;text-decoration:none}
+
+    /* Footer */
+    footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(255,255,255,0.02);margin-top:20px}
+
+    /* Modal */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,10,0.6);z-index:120;
+    }
+    .modal.show{display:flex}
+    .modal-card{width:90%;max-width:760px;background:var(--panel);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04)}
+    .modal-close{background:transparent;border:0;color:var(--muted);font-size:1.2rem;cursor:pointer;float:right}
+
+    @media (min-width:880px){
+      .hero{grid-template-columns:1fr 360px}
+      .hero-right{padding-left:18px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- NAV -->
+    <header class="nav" data-aos="fade-down">
+      <div class="brand">
+        <div class="avatar">SK</div>
+        <div>
+          <div class="name">Sarah Khairy</div>
+          <div class="muted" style="font-size:0.85rem">Flutter Developer</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="hero-left">
+          <div class="hero-role">Flutter Developer</div>
+          <h1 class="hero-title">Building beautiful and functional mobile experiences.</h1>
+          <p class="hero-sub">I build scalable, maintainable Flutter apps using Clean Architecture, BLoC, and modern best practices. Passionate about clean code, great UX and continuous learning.</p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">Explore My Work <i class="fa-solid fa-arrow-right"></i></a>
+            <a class="btn btn-outline" href="#contact">Get In Touch <i class="fa-regular fa-envelope"></i></a>
+          </div>
+
+          <div class="summary-row" style="margin-top:20px">
+            <div class="card" data-aos="fade-right">
+              <h3>Quick Info</h3>
+              <p class="muted">Flutter developer — mobile-first mindset — strong on architecture and state management.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="40">
+              <h3>Location</h3>
+              <p class="muted">Arment Al-Hiit, Luxor — available for remote work</p>
+            </div>
+            <div class="card" data-aos="fade-left" data-aos-delay="80">
+              <h3>Contact</h3>
+              <p class="muted">sarahkhairy180@gmail.com • <a href="https://www.linkedin.com/in/sarah-khairy-selim" target="_blank" style="color:var(--accent2);text-decoration:none">LinkedIn</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right" data-aos="fade-left" data-aos-delay="120" style="display:flex;align-items:center;justify-content:center">
+          <div style="width:100%;max-width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:76px;height:76px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071017;font-size:1.6rem">SK</div>
+              <div>
+                <div style="font-weight:700;font-size:1rem">Sarah Khairy</div>
+                <div class="muted" style="font-size:0.9rem">Flutter • BLoC • Clean Architecture</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px" class="muted">
+              I focus on building maintainable apps with clean architecture and smooth user experiences. I enjoy solving problems with elegant, well-tested code.
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:8px">
+              <a class="btn btn-primary" href="#projects">See Projects</a>
+              <a class="btn btn-outline" href="#about">About Me</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" data-aos="fade-up">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>About</h2>
+      </div>
+
+      <div class="card">
+        <p class="muted" style="font-size:1rem">
+          I'm a passionate Flutter developer who loves turning ideas into polished mobile apps. I focus on clean architecture, strong state management with BLoC, and writing maintainable code. Experienced building apps that integrate with Firebase, implement real-time features, and provide excellent user experiences.
+        </p>
+
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-outline" href="#skills">Read More • Skills</a>
+          <a class="btn btn-primary" href="#projects">View Full Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section" data-aos="fade-up">
+      <div class="section-title"><div class="dot"></div><h2>Projects</h2></div>
+
+      <div class="projects-grid">
+        <div class="project" data-proj='{"title":"Social Media App","short":"A social platform to create & share posts with auth & profiles.","tech":["Flutter","Firebase","Provider/BLoC"]}' onclick="openProject(this)" data-aos="zoom-in">
+          <div class="p-title">Social Media App</div>
+          <div class="p-desc">A Flutter app for sharing posts, profiles, and interacting with communities — includes auth and post management.</div>
+          <div class="chips"><span class="chip">Auth</span><span class="chip">Posts</span><span class="chip">Realtime</span></div>
+        </div>
+
+        <div class="project" data-proj='{"title":"Plantoria","short":"Smart plant monitoring with IoT and notifications.","tech":["Flutter","Firebase","IoT"]}' onclick="openProject(this)" data-aos="zoom-in" data-aos-delay="40">
+          <div class="p-title">Plantoria</div>
+          <div class="p-desc">Smart plant-monitoring app; integrates with sensors, detects diseases, and sends real-time alerts to users.</div>
+          <div class="chips"><span class="chip">IoT</span><span class="chip">Notifications</span><span class="chip">ML model</span></div>
+        </div>
+
+        <div class="project" data-proj='{"title":"Tasky","short":"Task manager with goal tracking and notifications.","tech":["Flutter","BLoC","Firebase"]}' onclick="openProject(this)" data-aos="zoom-in" data-aos-delay="80">
+          <div class="p-title">Tasky</div>
+          <div class="p-desc">A task & goal tracking app built with BLoC — nice UI, reminders, and analytics to help productivity.</div>
+          <div class="chips"><span class="chip">BLoC</span><span class="chip">Reminders</span><span class="chip">Analytics</span></div>
+        </div>
+
+        <div class="project" data-proj='{"title":"Learning App","short":"Secure e-learning with controlled video views & user management.","tech":["Flutter","Backend","Video"]}' onclick="openProject(this)" data-aos="zoom-in" data-aos-delay="120">
+          <div class="p-title">Learning App</div>
+          <div class="p-desc">A secure e-learning platform with view-limited videos, authentication and course tracking.</div>
+          <div class="chips"><span class="chip">Streaming</span><span class="chip">Access control</span><span class="chip">Auth</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <a class="btn btn-outline" href="#projects-full">View All Projects</a>
+      </div>
+    </section>
+
+    <!-- PROJECTS FULL -->
+    <section id="projects-full" class="section" data-aos="fade-up">
+      <div class="section-title"><div class="dot"></div><h2>Project Details</h2></div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>Social Media App</h3>
+        <p class="muted">Full-featured Flutter social app with authentication, posts, comments, likes, and profile management. Implemented modular architecture to keep UI and business logic separated. Focused on smooth image handling, pagination, and secure auth flows.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>Plantoria</h3>
+        <p class="muted">An IoT-integrated app that reads sensor data and uses a classification model to detect plant disease. Sends Firebase notifications and stores alerts in Realtime DB. Implemented push-notifications and an alerts dashboard inside the app.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>Tasky</h3>
+        <p class="muted">Task management app built with BLoC and Clean Architecture. Features: create/edit/delete tasks, goal tracker, reminders, statistics page, and offline sync using local persistence.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>Learning App</h3>
+        <p class="muted">Secure e-learning app with video streaming and a view-count restriction per student. Backend handles tokenized access and basic DRM-like protection. Includes profile roles for students and instructors.</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section" data-aos="fade-up">
+      <div class="section-title"><div class="dot"></div><h2>Skills</h2></div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <h3>Technical Skills</h3>
+            <div class="skills-grid" style="margin-top:10px">
+              <span class="skill-badge">Dart</span>
+              <span class="skill-badge">Flutter</span>
+              <span class="skill-badge">Clean Architecture</span>
+              <span class="skill-badge">BLoC</span>
+              <span class="skill-badge">OOP</span>
+              <span class="skill-badge">Data Structures</span>
+              <span class="skill-badge">Algorithms</span>
+              <span class="skill-badge">SOLID Principles</span>
+              <span class="skill-badge">Git & GitHub</span>
+              <span class="skill-badge">Unit & Widget Testing</span>
+            </div>
+          </div>
+
+          <div style="flex:1;min-width:220px">
+            <h3>Approach</h3>
+            <p class="muted">Clean, testable code — decomposition into layers (presentation, domain, data) — SOLID & maintainability-first decisions.</p>
+            <div style="margin-top:12px">
+              <small class="muted">Tools: VS Code, Firebase, Git, Postman, CI (basic)</small>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <a class="btn btn-outline" href="#projects-full">See Implementations</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" data-aos="fade-up">
+      <div class="section-title"><div class="dot"></div><h2>Contact</h2></div>
+
+      <div class="card contact-card">
+        <div class="contact-row">
+          <i class="fa-regular fa-envelope" style="color:var(--accent2)"></i>
+          <div>
+            <div style="font-weight:700">Email</div>
+            <a href="mailto:sarahkhairy180@gmail.com">sarahkhairy180@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <i class="fa-brands fa-linkedin" style="color:var(--accent1)"></i>
+          <div>
+            <div style="font-weight:700">LinkedIn</div>
+            <a href="https://www.linkedin.com/in/sarah-khairy-selim" target="_blank">/in/sarah-khairy-selim</a>
+          </div>
+        </div>
+
+        <div style="margin-top:10px" class="muted">Available for freelance and full-time roles. Open to remote opportunities.</div>
+
+        <div style="margin-top:12px;display:flex;gap:10px">
+          <a class="btn btn-primary" href="mailto:sarahkhairy180@gmail.com">Send Email</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/sarah-khairy-selim" target="_blank">View LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Sarah Khairy — All rights reserved.
+    </footer>
+  </div>
+
+  <!-- Project Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document" aria-labelledby="modal-title">
+      <button class="modal-close" aria-label="close" onclick="closeModal()">✕</button>
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc" class="muted" style="margin-top:10px"></p>
+      <div style="margin-top:12px" id="modal-tech"></div>
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <a id="modal-live" class="btn btn-primary" style="display:none" target="_blank">Live</a>
+        <a id="modal-code" class="btn btn-outline" style="display:none" target="_blank">Code</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if(target){
+            target.scrollIntoView({behavior:'smooth',block:'start'});
+          }
+        }
+      });
+    });
+
+    function openProject(el){
+      try{
+        const data = JSON.parse(el.getAttribute('data-proj'));
+        const modal = document.getElementById('modal');
+        document.getElementById('modal-title').textContent = data.title || '';
+        document.getElementById('modal-desc').textContent = data.short || '';
+        const tech = data.tech || [];
+        const techContainer = document.getElementById('modal-tech');
+        techContainer.innerHTML = '';
+        tech.forEach(t=>{
+          const span = document.createElement('span');
+          span.className = 'chip';
+          span.style.marginRight = '8px';
+          span.textContent = t;
+          techContainer.appendChild(span);
+        });
+
+        document.getElementById('modal-live').style.display = 'none';
+        document.getElementById('modal-code').style.display = 'none';
+
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+      }catch(e){
+        console.error(e);
+      }
+    }
+
+    function closeModal(){
+      const modal = document.getElementById('modal');
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    window.addEventListener('click', e=>{
+      const modal = document.getElementById('modal');
+      if(e.target === modal) closeModal();
+    });
+    window.addEventListener('keydown', e=>{
+      if(e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
